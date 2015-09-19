@@ -19,7 +19,7 @@ class BST(object):
 		find_spot = self.root.search(data)
 		if find_spot.val is None:
 			raise "Data does not exist in tree"
-		
+
 		elif find_spot.left.val is None and find_spot.right.val is None:
 			find_spot.val = None
 			self.length -= 1
