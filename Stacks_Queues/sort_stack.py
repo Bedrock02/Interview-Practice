@@ -2,6 +2,16 @@
  about how the stack is implemented. The following are the only functions
  that should be used to write this program: push | pop | peek | isEmpty.'''
 
+# Solution Explanation
+# In order to sort a stack we need another stack
+# 1 - if the spare stack is empty we want to push the top element of hte given stack
+# to the spare stack
+# 2 - else if we have items in the spare stack and we are sorting by acsending order
+#	While we don't run out of items to check against the spare stack and the element 
+# is greater than the top element in the spare stack, keep poping the spare stack
+# 3 - Once we either run out of items or find that the element is < the top element
+# in the spare stack then we want to push that element onto the spare stack
+# We continue to repeat this step (hence the while) until the given stack is empty
 from stack import Stack_Node
 def sort_stack(stack):
 	
@@ -27,4 +37,6 @@ unsorted_stack.push(3)
 unsorted_stack.push(9)
 unsorted_stack.push(4)
 
-print sort_stack(unsorted_stack)
+sorted_stack = sort_stack(unsorted_stack)
+print sorted_stack
+print sorted_stack.peek()

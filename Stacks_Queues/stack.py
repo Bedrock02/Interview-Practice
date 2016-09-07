@@ -2,10 +2,10 @@
 from node import *
 class Stack_Array(object):
 
-	def __init__(self,stack_input =[]):
+	def __init__(self, stack_input =[]):
 		self.stack = stack_input
 
-	def push(self,data):
+	def push(self, data):
 		self.stack.append(data)
 		return self
 	
@@ -22,56 +22,43 @@ class Stack_Array(object):
 
 class Stack_Node(object):
 
-	def __init__(self,threshold = None):
+	def __init__(self, threshold=None):
 		self.top = None
 		self.size = 0
 		self.threshold = threshold
 
-	def set_stack(self,current_stack):
+	def set_stack(self, current_stack):
 		for element in current_stack:
 			self.push(element)
 		return self
 
 	def pop(self):
-		if self.top != None:
-			item_popped = self.top.data
-			self.top = self.top.next
-			self.size -= 1
-			return item_popped
-		else:
+		if not self.top:
 			return None
+		item_popped = self.top.data
+		self.top = self.top.next
+		self.size -= 1
+		return item_popped
 
 	def peek(self):
 		return self.top.data
 
-	def push(self,data_input):
-		
-		if (self.threshold is not None and self.size < self.threshold) or self.threshold is None:
-			new_node = Node(data_input)
-			
-
-			if self.top is None:
-				self.top = new_node
-			
-
-			else:
-				new_node.next = self.top
-				self.top = new_node
-
-			self.size += 1
-		
-		else:
+	def push(self, data_input):
+		if self.threshold is not None and self.size > self.threshold:
 			return "Your stack is full"
+		new_node = Node(data_input)
+		if self.top is None:
+			self.top = new_node
+		else:
+			new_node.next = self.top
+			self.top = new_node
+		self.size += 1
 	
 	def is_full(self):
-		if self.size < self.threshold:
-			return False
-		return True
+		return self.size < self.threshold
 
 	def is_empty(self):
-		if self.size == 0:
-			return True
-		return False
+		return self.size == 0
 
 	def __str__(self):
 		return self.top.__str__()
