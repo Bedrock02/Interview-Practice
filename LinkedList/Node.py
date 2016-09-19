@@ -27,6 +27,21 @@ class List(object):
 		self.size -= 1
 		return self
 
+	def pop_node(self):
+		popped_node = self.head
+		if self.head.next is None:
+			self.head = None
+		else:
+			self.head = self.head.next
+			popped_node.next = None
+		self.size -= 1
+		return popped_node
+	
+	def peek(self):
+		return self.head.data if self.head else None
+
+	def __len__():
+		return self.size		
 	def __str__(self):
 		return self.head.__str__()
 

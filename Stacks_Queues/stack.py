@@ -17,8 +17,14 @@ class Stack_Array(object):
 	def peek(self):
 		return self.stack[-1]
 	
+	def is_empty(self):
+		return self.__len__() == 0
+
+	def __len__(self):
+		return self.stack.__len__()
+	
 	def __str__(self):
-		return self.stack.__str__()
+		return self.stack
 
 class Stack_Node(object):
 
