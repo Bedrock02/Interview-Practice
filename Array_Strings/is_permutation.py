@@ -23,89 +23,89 @@ Questions To Ask
 '''
 
 
-def isPermutation(stringA, stringB):
+def is_permutation(string_A, string_B):
     '''
     Utilizes Zip to find if two strings are Permutations
 
     Args:
-        stringA (str)
-        stringB (str)
+        string_A (str)
+        string_B (str)
 
     Returns:
         boolean: True/False if it is a permutation or not
     '''
 
-    if len(stringA) != len(stringB):
+    if len(string_A) != len(string_B):
         return False
 
-    sortedA = sorted(stringA)
-    sortedB = sorted(stringB)
+    sorted_A = sorted(string_A)
+    sorted_B = sorted(string_B)
 
-    for a, b in zip(sortedA, sortedB):
+    for a, b in zip(sorted_A, sorted_B):
         if a != b:
             return False
     return True
 
 
-def isPermutation2(stringA, stringB):
+def is_permutation2(string_A, string_B):
     '''
     Utilizes Iterates through the string to find if
     two strings are Permutations of each other
 
     Args:
-        stringA (str)
-        stringB (str)
+        string_A (str)
+        string_B (str)
 
     Returns:
         boolean: True/False if it is a permutation or not
     '''
-    if len(stringA) != len(stringB):
+    if len(string_A) != len(string_B):
         return False
 
-    sortedA = sorted(stringA)
-    sortedB = sorted(stringB)
+    sorted_A = sorted(string_A)
+    sorted_B = sorted(string_B)
 
-    for i in range(0, len(stringA)):
-        if sortedA[i] != sortedB[i]:
+    for i in range(0, len(string_A)):
+        if sorted_A[i] != sorted_B[i]:
             return False
     return True
 
 
-def isPermutation3(stringA, stringB):
+def is_permutation3(string_A, string_B):
     '''
     Cleanest Approach
 
     Args:
-        stringA (str)
-        stringB (str)
+        string_A (str)
+        string_B (str)
 
     Returns:
         boolean: True/False if it is a permutation or not
     '''
-    if len(stringA) != len(stringB):
+    if len(string_A) != len(string_B):
         return False
-    return sorted(stringA) == sorted(stringB)
+    return sorted(string_A) == sorted(string_B)
 
 
-def isPermutation4(stringA, stringB):
+def is_permutation4(string_A, string_B):
     '''
     Utilizes Counter to find if two strings are Permutations
 
     Args:
-        stringA (str)
-        stringB (str)
+        string_A (str)
+        string_B (str)
 
     Returns:
         boolean: True/False if it is a permutation or not
     '''
-    if len(stringA) != len(stringB):
+    if len(string_A) != len(string_B):
         return False
     counter = Counter()
 
-    for char in stringA:
+    for char in string_A:
         counter[char] += 1
 
-    for char in stringB:
+    for char in string_B:
         if counter[char] == 0:
             return False
         counter[char] -= 1
