@@ -22,3 +22,4 @@ def test_shortest_path_2():
         [ 0, 0, 0, 0, 0, 0, 0, 0,],
     ]
     assert find_shortest_path(grid, (0,0), (1,7)) == ('DDDRRRRUURRR', 12)
+    assert find_shortest_path(grid, (0,0), (8,7)) == ('DDDRRRRRRDDDDDR', 15)
