@@ -66,3 +66,15 @@ def remove_dups(linked_list):
             skip_count = True
         else:
             current_node = current_node.next
+
+
+def remove_dups_2(linked_list):
+    element_count = Counter()
+    current_node = linked_list.head
+    element_count[current_node.data] += 1
+    while current_node.next:
+        if element_count[current_node.next.data] > 0:
+            current_node.next = current_node.next.next
+            continue
+        element_count[current_node.next.data] += 1
+        current_node = current_node.next
