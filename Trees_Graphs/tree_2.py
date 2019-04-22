@@ -65,3 +65,31 @@ class Tree:
                 queue.enqueue(popped.right)
             queue.enqueue(TreeNode(value=None))
         return output
+
+def is_balanced(current_node):
+    if not current_node.left and not current_node.right:
+        return  True, 0
+
+    left_diff = None
+    right_diff = None
+    right_balanced = None
+    left_balanced = None
+
+    if current_node.left:
+        left_balanced, left_diff = is_balanced(current_node.left)
+    if current_node.right:
+        right_balanced, right_diff = is_balanced(current_node.right)
+
+    if left_balanced is False or right_balanced is False:
+        return False, None
+
+    if left_diff is not None and right_diff is None:
+        calc_diff = 1 + left_diff
+
+    elif right_diff is not None and left_diff is None:
+        calc_diff = 1 + right_diff
+
+    else:
+        calc_diff = (1 + right_diff) - (1 + left_diff)
+
+    return (False, None) if abs(calc_diff) > 1 else (True, calc_diff)
