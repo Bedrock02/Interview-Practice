@@ -29,3 +29,8 @@ def test_balance():
     my_tree.add(0)
     balanced, _ = is_balanced(my_tree.head)
     assert balanced == False
+
+
+def test_is_a_bst():
+    my_tree = Tree(collection=[1, 2, 3, 4, 5, 6, 7])
+    assert my_tree.is_a_bst(my_tree.head) == True

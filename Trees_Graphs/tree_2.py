@@ -27,6 +27,33 @@ class Tree:
         self.build(collection[0: mid_point])
         self.build(collection[mid_point + 1:])
 
+    def is_a_bst(self, current_node):
+        if current_node == None:
+            return True
+        left = current_node.left
+        right = current_node.right
+        current_value = current_node.value
+        # Leaf
+        if not left and not right:
+            return True
+
+        # Both Children
+        if left and right and not (left.value < current_value < right.value):
+            return False
+
+        # Left Only
+        if left and not right and left.value > current_value:
+            return False
+
+        # Right Only
+        if right and not left and right.value < current_value:
+            return False
+
+        right_subtree = self.is_a_bst(right)
+        left_subtree = self.is_a_bst(left)
+
+        return right_subtree and left_subtree
+
     def add(self, value):
         if self.head == None:
             self.head = TreeNode(value=value)
