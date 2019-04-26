@@ -12,9 +12,47 @@ class TreeNode:
 
 
 class Tree:
-    def __init__(self, node=None):
+    def __init__(self, node=None, collection=[]):
         self.head = node
         self.size = 0
+        if collection:
+            collection.sort()
+            self.build(collection)
+
+    def build(self, collection):
+        if not collection:
+            return
+        mid_point = len(collection) // 2
+        self.add(collection[mid_point])
+        self.build(collection[0: mid_point])
+        self.build(collection[mid_point + 1:])
+
+    def is_a_bst(self, current_node):
+        if current_node == None:
+            return True
+        left = current_node.left
+        right = current_node.right
+        current_value = current_node.value
+        # Leaf
+        if not left and not right:
+            return True
+
+        # Both Children
+        if left and right and not (left.value < current_value < right.value):
+            return False
+
+        # Left Only
+        if left and not right and left.value > current_value:
+            return False
+
+        # Right Only
+        if right and not left and right.value < current_value:
+            return False
+
+        right_subtree = self.is_a_bst(right)
+        left_subtree = self.is_a_bst(left)
+
+        return right_subtree and left_subtree
 
     def add(self, value):
         if self.head == None:
@@ -39,7 +77,6 @@ class Tree:
         return in_tree(value, current_node.right)
 
     def insert(self, value, current_node):
-        # TODO: Refactor
         child_name = "left" if value < current_node.value else "right"
         child = getattr(current_node, child_name)
         if child == None:
@@ -51,13 +88,14 @@ class Tree:
     def __str__(self):
         queue = Queue_list()
         queue.enqueue(self.head)
-        queue.enqueue(TreeNode(value=None))
+        queue.enqueue(TreeNode())
         output = ""
         while not queue.is_empty():
             popped = queue.dequeue()
-            if popped.value == None:
+            if not popped or popped.value == None:
                 output += "\n"
                 continue
+            print("POPPED {}".format(popped.value))
             output += str(popped.value) + " "
             if popped.left:
                 queue.enqueue(popped.left)
@@ -66,30 +104,31 @@ class Tree:
             queue.enqueue(TreeNode(value=None))
         return output
 
-def is_balanced(current_node):
-    if not current_node.left and not current_node.right:
-        return  True, 0
 
-    left_diff = None
-    right_diff = None
-    right_balanced = None
-    left_balanced = None
+def is_balanced(node=None):
+    if node is None:
+        return True, None
 
-    if current_node.left:
-        left_balanced, left_diff = is_balanced(current_node.left)
-    if current_node.right:
-        right_balanced, right_diff = is_balanced(current_node.right)
+    if node.left is None and node.right is None:
+        return True, 0
 
-    if left_balanced is False or right_balanced is False:
+    left_balanced, left_value = is_balanced(node.left)
+    right_balanced, right_value = is_balanced(node.right)
+
+    if not left_balanced or not right_balanced:
         return False, None
 
-    if left_diff is not None and right_diff is None:
-        calc_diff = 1 + left_diff
+    if left_value and left_value > 1 or right_value and right_value > 1:
+        return False, None
 
-    elif right_diff is not None and left_diff is None:
-        calc_diff = 1 + right_diff
+    if left_value is None:
+        left_height = 0
 
-    else:
-        calc_diff = (1 + right_diff) - (1 + left_diff)
+    right_height = 0 if right_value is None else 1 + right_value
+    left_height = 0 if left_value is None else 1 + left_value
 
-    return (False, None) if abs(calc_diff) > 1 else (True, calc_diff)
+    diff = abs(right_height - left_height)
+
+    if diff > 1:
+        return False, None
+    return True, diff
