@@ -1,5 +1,6 @@
 from robot_traverse import *
 
+
 def test_robot_traverse():
     grid = [
         [0, 0, 0],
@@ -8,7 +9,5 @@ def test_robot_traverse():
     ]
     start = (0, 0)
     end = (2, 2)
-    paths = []
-    current_path = ''
-    traverse(start, end, current_path, grid, paths)
+    paths = traverse(start, end, grid)
     assert len(paths) == 6
