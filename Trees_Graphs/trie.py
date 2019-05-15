@@ -33,8 +33,8 @@ class Trie:
         # We are at the top
         children = self._children if current_node is None else current_node.children
 
-        if not given_string and current_node and current_node.is_an_end:
-            return True
+        if not given_string:
+            return current_node and current_node.is_an_end
 
         child_index = child_index = ord(given_string[0].lower()) - 97
         if children[child_index] is None:
