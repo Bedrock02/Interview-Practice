@@ -78,6 +78,10 @@ class Tree:
                 queue.append(None)
         return output
 
+    def find_kth_pre_order_item(self, k, current_node=None):
+        '''
+        '''
+
     def find_kth_in_order_item(self, k, current_node=None):
         '''
         Find Kth Item in Order
@@ -114,3 +118,51 @@ class Tree:
             if count == k:
                 return True, current_node.right.data
         return False, count
+
+    def find_kth_in_order_item_with_list(self, k):
+        collection = []
+        if k > self.size:
+            return None
+        self.dfs(self._root, collection)
+        return collection[k-1]
+
+    def dfs(self, current_node, collection):
+        if current_node is None:
+            return
+        self.dfs(current_node.left, collection)
+        collection.append(current_node.data)
+        self.dfs(current_node.right, collection)
+
+    def find_kth_in_order_item_iterative(self, k):
+        traversal = []
+        current_node = self._root
+        while traversal or current_node is not None:
+            # Go As far left as you can go
+            while current_node:
+                traversal.append(current_node)  # we will return to the parent later
+                current_node = current_node.left
+
+            # Now that we went as far left as we can go, get the parent
+            current_node = traversal.pop()
+            k -= 1
+            if k == 0:
+                return current_node.data
+
+            # Go right
+            current_node = current_node.right
+        return None
+
+    def find_kth_pre_order_item_iterative(self, k):
+        traversal = []
+        current_node = self._root
+        while traversal or current_node is not None:
+            while current_node:
+                k -= 1
+                if k == 0:
+                    return current_node.data
+                traversal.append(current_node)
+                current_node = current_node.left
+
+            popped = traversal.pop()
+            current_node = popped.right
+        return None

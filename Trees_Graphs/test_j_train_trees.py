@@ -44,3 +44,52 @@ def test_tree_find_kth_in_order():
     assert my_tree.find_kth_in_order_item(3) == (True, 4)
     assert my_tree.find_kth_in_order_item(4) == (True, 5)
     assert my_tree.find_kth_in_order_item(5) == (True, 6)
+    assert my_tree.find_kth_in_order_item(6) == (False, my_tree.size)
+
+
+def test_tree_find_kth_in_order_with_list():
+    my_tree = Tree()
+    my_tree.insert(5)
+    my_tree.insert(3)
+    my_tree.insert(6)
+    my_tree.insert(1)
+    my_tree.insert(4)
+
+    assert my_tree.find_kth_in_order_item_with_list(1) == 1
+    assert my_tree.find_kth_in_order_item_with_list(2) == 3
+    assert my_tree.find_kth_in_order_item_with_list(3) == 4
+    assert my_tree.find_kth_in_order_item_with_list(4) == 5
+    assert my_tree.find_kth_in_order_item_with_list(5) == 6
+    assert my_tree.find_kth_in_order_item_with_list(6) == None
+
+
+def test_tree_find_kth_in_order_iteratively():
+    my_tree = Tree()
+    my_tree.insert(5)
+    my_tree.insert(3)
+    my_tree.insert(6)
+    my_tree.insert(1)
+    my_tree.insert(4)
+
+    assert my_tree.find_kth_in_order_item_iterative(1) == 1
+    assert my_tree.find_kth_in_order_item_iterative(2) == 3
+    assert my_tree.find_kth_in_order_item_iterative(3) == 4
+    assert my_tree.find_kth_in_order_item_iterative(4) == 5
+    assert my_tree.find_kth_in_order_item_iterative(5) == 6
+    assert my_tree.find_kth_in_order_item_iterative(6) == None
+
+
+def test_tree_find_kth_pre_order_iteratively():
+    my_tree = Tree()
+    my_tree.insert(5)
+    my_tree.insert(3)
+    my_tree.insert(6)
+    my_tree.insert(1)
+    my_tree.insert(4)
+
+    assert my_tree.find_kth_pre_order_item_iterative(1) == 5
+    assert my_tree.find_kth_pre_order_item_iterative(2) == 3
+    assert my_tree.find_kth_pre_order_item_iterative(3) == 1
+    assert my_tree.find_kth_pre_order_item_iterative(4) == 4
+    assert my_tree.find_kth_pre_order_item_iterative(5) == 6
+    assert my_tree.find_kth_pre_order_item_iterative(6) == None
