@@ -27,7 +27,6 @@ class TrieNode:
 class Trie:
     def __init__(self):
         self._children = [None] * 26
-        self._is_empty = True
 
     def search(self, given_string, current_node = None):
         # We are at the top
@@ -44,24 +43,34 @@ class Trie:
 
 
     def insert(self, given_string, current_node = None):
+        child_index = ord(given_string[0].lower()) - 97 if given_string else -1
+
         if current_node is None:
-            first_node = TrieNode(given_string[0])
-            child_index = child_index = ord(given_string[0].lower()) - 97
-            self._children[child_index] = first_node
+            if self._children[child_index] is None:
+                self._children[child_index] = TrieNode(given_string[0])
             self.insert(given_string[1:], self._children[child_index])
-            self._is_empty = False
             return
 
         if not given_string:
             current_node.is_an_end = True
             return
 
-        child_index = ord(given_string[0].lower()) - 97
 
         # If character already exists, then continue inserting, else create a node
-        if current_node.children[child_index]:
+        if current_node.children[child_index] is not None:
             self.insert(given_string[1:], current_node.children[child_index])
         else:
             new_node = TrieNode(given_string[0])
             current_node.children[child_index] = new_node
             self.insert(given_string[1:], new_node)
+
+    def print_out_words(self, collection, current_node=None, current_word=""):
+        '''
+        Collection is a required field, must pass in a list
+        '''
+        if current_node and current_node.is_an_end:
+            collection.append(current_word)
+        children = self._children if current_node is None else current_node.children
+        for item in children:
+            if item is not None:
+                self.print_out_words(collection, item, current_word + item.data)
