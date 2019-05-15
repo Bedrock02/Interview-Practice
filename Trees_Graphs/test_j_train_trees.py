@@ -1,5 +1,6 @@
 from j_train_trees import *
 
+
 def test_tree_insert():
     my_tree = Tree()
 
@@ -8,6 +9,7 @@ def test_tree_insert():
     assert my_tree.size == 1
     my_tree.insert(6)
     assert my_tree.size == 2
+
 
 def test_tree_level_traverse():
     my_tree = Tree()
@@ -27,3 +29,18 @@ def test_tree_level_traverse():
     my_tree.insert(8)
 
     assert my_tree.traverse_level() == "5 \n2 7 \n1 3 6 8 \n"
+
+
+def test_tree_find_kth_in_order():
+    my_tree = Tree()
+    my_tree.insert(5)
+    my_tree.insert(3)
+    my_tree.insert(6)
+    my_tree.insert(1)
+    my_tree.insert(4)
+
+    assert my_tree.find_kth_in_order_item(1) == (True, 1)
+    assert my_tree.find_kth_in_order_item(2) == (True, 3)
+    assert my_tree.find_kth_in_order_item(3) == (True, 4)
+    assert my_tree.find_kth_in_order_item(4) == (True, 5)
+    assert my_tree.find_kth_in_order_item(5) == (True, 6)

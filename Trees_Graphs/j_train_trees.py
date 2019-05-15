@@ -23,6 +23,7 @@ class Node:
     def left(self, node):
         self._left = node
 
+
 class Tree:
     def __init__(self):
         self._root = None
@@ -32,7 +33,7 @@ class Tree:
     def size(self):
         return self._size
 
-    def insert(self, value, current_node = None, first_pass = True):
+    def insert(self, value, current_node=None, first_pass=True):
         if first_pass and current_node is None:
             current_node = self._root
         if self._size == 0:
@@ -76,3 +77,40 @@ class Tree:
             if queue:
                 queue.append(None)
         return output
+
+    def find_kth_in_order_item(self, k, current_node=None):
+        '''
+        Find Kth Item in Order
+        Create a count to see where the kth item is
+        '''
+        if current_node is None:
+            current_node = self._root
+
+        count = 0
+        if not current_node.left and not current_node.right:
+            return False, 1
+
+        if current_node.left:
+            found, result = self.find_kth_in_order_item(k, current_node.left, )
+            if found:
+                return True, result
+            else:
+                count += result
+
+            if count == k:
+                return True, current_node.left.data
+
+        count += 1
+        if count == k:
+            return True, current_node.data
+
+        if current_node.right:
+            found, result = self.find_kth_in_order_item(k, current_node.right)
+            if found:
+                return True, result
+            else:
+                count += result
+
+            if count == k:
+                return True, current_node.right.data
+        return False, count
