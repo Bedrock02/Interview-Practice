@@ -93,3 +93,18 @@ def test_tree_find_kth_pre_order_iteratively():
     assert my_tree.find_kth_pre_order_item_iterative(4) == 4
     assert my_tree.find_kth_pre_order_item_iterative(5) == 6
     assert my_tree.find_kth_pre_order_item_iterative(6) == None
+
+
+def test_tree_find_kth_post_order_iteratively():
+    my_tree = Tree()
+    my_tree.insert(5)
+    my_tree.insert(3)
+    my_tree.insert(6)
+    my_tree.insert(1)
+    my_tree.insert(4)
+    assert my_tree.find_kth_post_order_item_iterative(1) == 1
+    assert my_tree.find_kth_post_order_item_iterative(2) == 4
+    assert my_tree.find_kth_post_order_item_iterative(3) == 3
+    assert my_tree.find_kth_post_order_item_iterative(4) == 6
+    assert my_tree.find_kth_post_order_item_iterative(5) == 5
+    assert my_tree.find_kth_post_order_item_iterative(6) == None

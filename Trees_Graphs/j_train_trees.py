@@ -78,10 +78,6 @@ class Tree:
                 queue.append(None)
         return output
 
-    def find_kth_pre_order_item(self, k, current_node=None):
-        '''
-        '''
-
     def find_kth_in_order_item(self, k, current_node=None):
         '''
         Find Kth Item in Order
@@ -165,4 +161,25 @@ class Tree:
 
             popped = traversal.pop()
             current_node = popped.right
+        return None
+
+    def find_kth_post_order_item_iterative(self, k):
+        traversal = []
+        current_node = self._root
+        while traversal or current_node is not None:
+            while current_node:
+                if current_node.right:
+                    traversal.append(current_node.right)
+                traversal.append(current_node)
+                current_node = current_node.left
+            popped = traversal.pop()
+
+            # Not proccessed a Right
+            if popped.right is not None and popped.right in traversal:
+                current_node = traversal.pop()
+                traversal.append(popped)
+            else:
+                k -= 1
+                if k == 0:
+                    return popped.data
         return None
