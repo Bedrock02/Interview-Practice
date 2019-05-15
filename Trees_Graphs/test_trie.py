@@ -12,6 +12,4 @@ def test_trie_print_out_words():
     my_trie.insert("cat")
     my_trie.insert("cattle")
     my_trie.insert("dog")
-    words = []
-    my_trie.print_out_words(words)
-    assert sorted(words) == sorted(["cat", "dog", "cattle"])
+    assert sorted(my_trie.print_out_words()) == sorted(["cat", "dog", "cattle"])

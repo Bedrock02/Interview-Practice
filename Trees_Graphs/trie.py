@@ -64,13 +64,15 @@ class Trie:
             current_node.children[child_index] = new_node
             self.insert(given_string[1:], new_node)
 
-    def print_out_words(self, collection, current_node=None, current_word=""):
-        '''
-        Collection is a required field, must pass in a list
-        '''
+    def print_out_words(self):
+        collection = []
+        self.traverse(None, "", collection)
+        return collection
+
+    def traverse(self, current_node, current_word, collection):
         if current_node and current_node.is_an_end:
             collection.append(current_word)
         children = self._children if current_node is None else current_node.children
         for item in children:
             if item is not None:
-                self.print_out_words(collection, item, current_word + item.data)
+                self.traverse(item, current_word + item.data, collection)
