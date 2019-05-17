@@ -38,13 +38,15 @@ class linked_hash:
         self._size = 0
 
     def add_to_list(self, key, value):
+        prev_node = None
         curr_node = self._hash_map[key[0]]
         while curr_node is not None:
             if curr_node.key == key:
                 curr_node.value = value
                 return
+            prev_node = curr_node
             curr_node = curr_node.next
-        curr_node.next = Node(key, value)
+        prev_node.next = Node(key, value)
         self._size += 1
 
     def insert(self, key, value):
