@@ -49,6 +49,19 @@ class linked_hash:
         prev_node.next = Node(key, value)
         self._size += 1
 
+    def find(self, key):
+        if key[0] not in self._hash_map:
+            raise Exception("Key: {} does not exists".format(key))
+
+        current_node = self._hash_map[key[0]]
+        while current_node and current_node.key is not key:
+            current_node = current_node.next
+
+        if current_node is None:
+            raise Exception("Key: {} does not exists".format(key))
+
+        return current_node.value
+
     def insert(self, key, value):
         if key[0] in self._hash_map:
             self.add_to_list(key, value)
@@ -84,6 +97,9 @@ class linked_hash:
 
     def __setitem__(self, key, value):
         self.insert(key,value)
+
+    def __getitem__(self, key):
+        return self.find(key)
 
     def __delitem__(self, key):
         self.delete(key)

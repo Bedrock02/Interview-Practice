@@ -35,6 +35,16 @@ def test_delete_hash_item():
     assert len(my_hash) == 3
     assert str(my_hash) == "{ dog:wof, dogg:wof, doggg:wof, }"
 
+def test_getter():
+    my_hash = linked_hash()
+    my_hash['cat'] = 'meow'
+    my_hash['dogg'] = 'wof'
+    my_hash['doggg'] = 'wof'
+
+    assert my_hash['cat'] == 'meow'
+    assert my_hash['dogg'] == 'wof'
+    assert my_hash['doggg'] == 'wof'
+
 def test_str():
     my_hash = linked_hash()
     my_hash['cat'] = 'meow'
